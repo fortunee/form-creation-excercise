@@ -1,5 +1,7 @@
-import { type TicketType } from '../types';
-import { formatPrice } from '../util';
+import Input from '../ui/Input';
+import { type TicketType } from '../../types';
+import { formatPrice } from '../../util';
+import ticketStyles from './BandForm.module.css';
 
 type TicketTypeSectionProps = {
   ticketTypes: TicketType[];
@@ -18,23 +20,23 @@ const TicketTypeSection = (props: TicketTypeSectionProps) => {
     };
 
   return (
-    <section>
-      <h2>Ticket Selection</h2>
+    <section className={ticketStyles.ticket__section}>
+      <h2>Select Tickets</h2>
       <ul>
         {ticketTypes.map((ticketType) => (
           <li key={ticketType.name}>
             <div>
-              {ticketType.name}
-              {ticketType.description} - {formatPrice(ticketType.cost)}
+              <h5>{ticketType.name}</h5>
+              <p>{ticketType.description}</p>
+              <h5>{formatPrice(ticketType.cost)}</h5>
             </div>
-            <label>
-              <input
-                type="number"
-                min={0}
-                value={ticketQuantities[ticketType.type]}
-                onChange={handleOnChange(ticketType.type)}
-              />
-            </label>
+            <Input
+              labelText="Quantity"
+              type="number"
+              min={0}
+              value={ticketQuantities[ticketType.type]}
+              onChange={handleOnChange(ticketType.type)}
+            />
           </li>
         ))}
       </ul>

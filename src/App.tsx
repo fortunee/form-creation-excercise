@@ -1,8 +1,8 @@
-import skaBand from "./band-json/ska-band.json";
-import kpopBand from "./band-json/kpop-band.json";
-import punkBand from "./band-json/punk-band.json";
+import skaBand from './band-json/ska-band.json';
+import kpopBand from './band-json/kpop-band.json';
+import punkBand from './band-json/punk-band.json';
 
-import BandForm from "./BandForm";
+import BandForm from './components/BandForm';
 
 function App() {
   const bands = [skaBand, kpopBand, punkBand];

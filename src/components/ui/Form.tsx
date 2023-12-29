@@ -1,5 +1,5 @@
-import { type ComponentPropsWithoutRef } from "react";
-import { type Transaction } from "../types";
+import { type ComponentPropsWithoutRef } from 'react';
+import { type Transaction } from '../../types';
 
 type FormProps = ComponentPropsWithoutRef<'form'> & {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ const Form = ({ children, onSubmitTransaction, ...otherProps }: FormProps) => {
 
     onSubmitTransaction({
       ...transaction,
-      cvv: parseInt(transaction.cvv as string, 10),
+      cvv: +transaction.cvv,
       creditCardNumber: +transaction.creditCardNumber,
     });
   };

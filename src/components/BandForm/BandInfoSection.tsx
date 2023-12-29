@@ -8,10 +8,9 @@ const BandInfoSection = (props: BandInfoSectionProps) => {
 
   return (
     <section>
-      <div>
-        <img src={imgUrl} alt={name} height={200} />
-        <p>{description_blurb}</p>
-      </div>
+      <img src={imgUrl} alt={name} height={600} />
+      {/** @todo: Sanitize description_blurb before rendering */}
+      <div dangerouslySetInnerHTML={{ __html: description_blurb }} />
     </section>
   );
 };

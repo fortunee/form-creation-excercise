@@ -1,0 +1,55 @@
+.button {
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  background-color: #2f7b8f;
+  color: #b7d9e4;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.button:hover {
+  background-color: #4588b1;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-size: 18px;
+}
+
+.input:focus {
+  border: 1.5px solid #40a9ff;
+  box-shadow: 0 0 0 2px #1890ff33;
+  outline: none;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px #0000001a;
+  width: 100%;
+}
+
+.alert_success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert_danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert_close {
+  float: right;
+  cursor: pointer;
+}

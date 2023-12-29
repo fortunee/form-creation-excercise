@@ -1,0 +1,99 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 1em;
+}
+
+.header p {
+  font-size: 1.2em;
+  color: #808080;
+  display: flex;
+  align-items: center;
+}
+
+.form__section {
+  display: flex;
+}
+
+.form__section > * {
+  margin-right: 1em;
+}
+
+.ticket__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket__section h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.ticket__section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ticket__section li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ticket__section li input {
+  display: flex;
+  width: 5em;
+}
+
+.ticket__section li h5 {
+  font-size: larger;
+  color: #4d4c4c;
+  margin: 1em 0;
+}
+
+.total_section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.total_section > * {
+  font-size: larger;
+  font-weight: bold;
+  color: #4d4c4c;
+}
+
+.userinfo__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.userinfo__section div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment_details__section {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment_details__section div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.userinfo__section div label, .payment_details__section div label {
+  width: 25em;
+}
+
+.wrapper button {
+  width: 100%;
+}

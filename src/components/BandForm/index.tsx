@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { IoLocationOutline } from 'react-icons/io5';
+import { CiCalendarDate } from 'react-icons/ci';
 
-import BandInfoSection from './components/BandInfoSection';
-import TicketTypeSection from './components/TicketTypeSection';
-import PaymentDetailsSection from './components/PaymentDetailsSection';
-import UserInfoSection from './components/UserInfoSection';
-import Form from './components/Form';
-import { formatDate, formatPrice } from './util';
-import { type Transaction, type Band, Ticket } from './types';
+import BandInfoSection from './BandInfoSection';
+import TicketTypeSection from './TicketTypeSection';
+import PaymentDetailsSection from './PaymentDetailsSection';
+import UserInfoSection from './UserInfoSection';
+import Form from '../ui/Form';
+import Button from './../ui/Button';
+import Alert from '../ui/Alert';
+
+import { formatDate, formatPrice } from '../../util';
+import { type Transaction, type Band, Ticket } from '../../types';
+
+import bandformStyles from './BandForm.module.css';
 
 type BandFormProps = {
   band: Band;
@@ -14,6 +21,8 @@ type BandFormProps = {
 
 function BandForm({ band }: BandFormProps) {
   const { ticketTypes, name, date, location } = band;
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const [successMessage, setSuccessMessage] = useState<string>();
 
   const [ticketQuantities, setTicketQuantities] = useState(
     ticketTypes.reduce((acc, ticket) => {
@@ -38,7 +47,7 @@ function BandForm({ band }: BandFormProps) {
 
   const validateTicketQuantites = (tickets: Ticket[]) => {
     return tickets.some((ticket) => ticket.quantity > 0);
-  }
+  };
 
   const submitTransaction = (transaction: Partial<Transaction>) => {
     transaction.total = calculateTotal();
@@ -47,26 +56,38 @@ function BandForm({ band }: BandFormProps) {
       quantity: ticketQuantities[ticket.type],
     }));
 
-    const hasValidTicketQuantities = validateTicketQuantites(transaction.tickets);
+    const hasValidTicketQuantities = validateTicketQuantites(
+      transaction.tickets
+    );
 
     if (!hasValidTicketQuantities) {
-      // TODO: show error message with Bootstrap alert
-      alert('Please select at least one ticket type.');
+      setErrorMessage('Please select at least one ticket type');
       return;
     }
+
+    setErrorMessage('');
+    setSuccessMessage('You have successfully purchased some tickets!');
 
     // TODO: send transaction to some payment API maybe Stripe
     console.log(transaction);
   };
 
   return (
-    <div>
-      <header>
+    <div className={bandformStyles.wrapper}>
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+      {successMessage && <Alert variant="success">{successMessage}</Alert>}
+      <header className={bandformStyles.header}>
         <h1>{name}</h1>
-        <p>{formatDate(date)}</p>
-        <p>{location}</p>
+        <p>
+          <CiCalendarDate size={30} />
+          {formatDate(date)}
+        </p>
+        <p>
+          <IoLocationOutline size={30} />
+          {location}
+        </p>
       </header>
-      <div>
+      <div className={bandformStyles.form__section}>
         <BandInfoSection {...band} />
 
         <Form onSubmitTransaction={submitTransaction}>
@@ -75,17 +96,13 @@ function BandForm({ band }: BandFormProps) {
             ticketQuantities={ticketQuantities}
             onQuantityChange={handleTicketQuantityChange}
           />
-
-          <section>
-            <h2>Total Amount</h2>
+          <div className={bandformStyles.total_section}>
+            <p>Total</p>
             <p>{formatPrice(calculateTotal())}</p>
-          </section>
-
+          </div>
           <UserInfoSection />
-
           <PaymentDetailsSection />
-
-          <button type="submit">Submit</button>
+          <Button type="submit">Get Tickets</Button>
         </Form>
       </div>
     </div>
